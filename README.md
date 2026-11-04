@@ -1,7 +1,5 @@
 # Clasificación de tumores cerebrales en resonancia magnética
 
-Trabajo académico individual de la asignatura **Reconocimiento de Formas y Aprendizaje Automático (RFA)** del Máster en Inteligencia Artificial, Reconocimiento de Formas e Imagen Digital (MIARFID), Universitat Politècnica de València, curso 2026/27.
-
 Se clasifican cortes 2D de RM cerebral en cuatro clases (glioma, meningioma, pituitario y sin tumor) con el [Brain Tumor MRI Dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) de Kaggle. El trabajo compara PCA con clasificadores clásicos, una CNN desde cero, una ResNet18 preentrenada con tres grados de ajuste y el efecto del aumento de datos. Antes de entrenar se limpia el dataset (copias exactas, casi-copias y pares con etiquetas contradictorias) y se construye una validación agrupada por similitud perceptual (pHash) para evitar fugas, ya que el dataset no incluye identificadores de paciente.
 
 La explicación completa está en la memoria (`Memoria_RFA.pdf`); este README solo describe el repositorio y cómo reproducirlo.
