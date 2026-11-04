@@ -36,13 +36,13 @@ El dataset no se incluye en el repositorio. Puede descargarse desde la web de Ka
 
 ```bash
 kaggle datasets download -d masoudnickparvar/brain-tumor-mri-dataset
-unzip brain-tumor-mri-dataset.zip -d rfa_data
+unzip brain-tumor-mri-dataset.zip -d data
 ```
 
 El cuaderno espera esta estructura, relativa al directorio desde el que se ejecuta:
 
 ```
-rfa_data/
+data/
 ├── Training/{glioma,meningioma,notumor,pituitary}/
 └── Testing/{glioma,meningioma,notumor,pituitary}/
 ```
@@ -61,7 +61,7 @@ Los pesos de ImageNet de la ResNet18 los descarga `timm` desde Hugging Face Hub 
 
 ## Reproducción
 
-1. Ejecutar `rfa_trabajo.ipynb` de principio a fin desde el directorio que contiene `rfa_data/`. La limpieza genera `splits.csv`, que leen todos los experimentos posteriores, y cada experimento guarda sus pesos e historiales en `results/`. Con la GPU usada, el entrenamiento de las 21 redes (7 configuraciones × 3 semillas) lleva algo más de una hora.
+1. Ejecutar `rfa_trabajo.ipynb` de principio a fin desde el directorio que contiene `data/`. La limpieza genera `splits.csv`, que leen todos los experimentos posteriores, y cada experimento guarda sus pesos e historiales en `results/`. Con la GPU usada, el entrenamiento de las 21 redes (7 configuraciones × 3 semillas) lleva algo más de una hora.
 2. Ejecutar `rfa_test_sin62.ipynb`, que reutiliza `splits.csv` y los pesos de `results/`. Su primera comprobación verifica que el test completo reproduce exactamente `results/evaluacion_test.csv`; si falla, algo no coincide con el cuaderno principal. Con `HACER_E1 = False` se omite E1 y el PCA.
 
 La partición es determinista (`StratifiedGroupKFold` con `random_state=42`) y cada red usa la semilla `42 + s`, con `s ∈ {0, 1, 2}`. Al no forzar algoritmos deterministas en cuDNN, los resultados de las redes pueden variar ligeramente entre ejecuciones o máquinas. Las parejas de imágenes que se muestran al elegir el umbral de pHash se sortean sin semilla, así que esas figuras cambian en cada ejecución.
